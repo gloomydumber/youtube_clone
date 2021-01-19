@@ -1,4 +1,7 @@
-const express = require('express');
+import express from "express";
+import morgan from "morgan";
+import helmet from "helmet";
+
 const app = express();
 
 const PORT = 3200;
@@ -9,7 +12,10 @@ const handleHome = (req, res) => res.send("Hello from home !");
 
 const handleProfile = (req, res) => res.send("You are on my profile");
 
-app.get('/', handleHome);
+app.use(helmet());
+app.use(morgan("dev"));
+
+app.get('/',handleHome);
 
 app.get('/profile', handleProfile);
 
